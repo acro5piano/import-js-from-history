@@ -24,6 +24,7 @@ function! ImportJs#Import() abort
     let l:options = ['(abort)'] + l:lines
     let l:userInput = inputlist(map(deepcopy(l:options), { i, x -> i.': '.x }))
     if (l:userInput == 0)
+      echo 'aborted.'
       return
     endif
   endif
