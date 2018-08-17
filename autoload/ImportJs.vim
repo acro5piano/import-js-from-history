@@ -21,9 +21,9 @@ function! ImportJs#Import() abort
 
   let l:lineToImport = 0
   if len(l:lines) > 1
-    let l:options = ['0 (abort)'] + lines
-    let l:lineToImport = inputlist(map(deepcopy(lines), { i, x -> (i + 1).': '.x }))
-    if (l:lineToImport == 0)
+    let l:options = ['(abort)'] + l:lines
+    let l:userInput = inputlist(map(deepcopy(l:options), { i, x -> i.': '.x }))
+    if (l:userInput == 0)
       return
     endif
   endif
@@ -31,6 +31,6 @@ function! ImportJs#Import() abort
   let l:curPos = getpos('.')
   call cursor(2, 1)
   exec 's/\s*/\r/'
-  call setline(2, l:lines[l:lineToImport])
-  call cursor(l:curPos[1], l:curPos[2])
+  call setline(2, l:lines[l:userInput - 1])
+  call cursor(l:curPos[1] + 1, l:curPos[2])
 endfunction
