@@ -27,11 +27,12 @@ function! ImportJs#Import() abort
       echo 'aborted.'
       return
     endif
+    let l:lineToImport = l:userInput
   endif
 
   let l:curPos = getpos('.')
   call cursor(2, 1)
   exec 's/\s*/\r/'
-  call setline(2, l:lines[l:userInput - 1])
+  call setline(2, l:lines[l:lineToImport - 1])
   call cursor(l:curPos[1] + 1, l:curPos[2])
 endfunction
