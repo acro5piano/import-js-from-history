@@ -1,8 +1,8 @@
 # import-js-from-history
 
-easily write import in JavaScript &amp; TypeScript
+Make it easy to write `import` statement in JavaScript & TypeScript.
 
-![](https://github.com/acro5piano/import-js-from-history/blob/master/demo.gif)
+![](https://github.com/acro5piano/import-js-from-history/blob/master/demo-2.gif)
 
 # Install
 
@@ -12,13 +12,12 @@ Plug 'acro5piano/import-js-from-history'
 
 # How it works
 
-`import-js-from-history` make ~/.import-js-list and search it as import candidates.
-
-First, call `:ImportJsMake` to create `~/.import-js-list`. Then run `:ImportJs` where cursor is at imported word.
+- First of all, call `:ImportJsMake` to create `~/.import-js-list`, which is search candidates.
+- And call `:ImportJs` (or `:ImportJsFZF`) when the cursor is on the word to import.
 
 # Example setting
 
 ```
-nnoremap <Leader>ij :ImportJs<CR>
+nnoremap <Leader>ij :ImportJsFZF<CR>
 
 ```
