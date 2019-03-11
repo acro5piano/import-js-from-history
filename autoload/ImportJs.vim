@@ -36,3 +36,33 @@ function! ImportJs#Import() abort
   call setline(2, l:lines[l:lineToImport - 1])
   call cursor(l:curPos[1] + 1, l:curPos[2])
 endfunction
+
+function! ImportJs#ImportFZF() abort
+  let l:search = expand("<cword>")
+  if empty(l:search)
+    echo '[ImportJs] No search word at current cursor'
+    return
+  endif
+  let l:command = "cat ~/.import-js-list | egrep '\\b".search."\\b'"
+  let l:lines = systemlist(command)
+  if (len(l:lines) == 0)
+    echo '[ImportJs] No match for: '.search
+    return
+  endif
+
+  " FZF customization
+  call fzf#run({
+  \  'source':  l:lines,
+  \  'sink':    function('s:fzf_callback'),
+  \  'options': '-m -x +s',
+  \  'down':    '40%'})
+endfunction
+
+function! s:fzf_callback(line) abort
+  let l:lineToImport = 0
+  let l:curPos = getpos('.')
+  call cursor(2, 1)
+  exec 's/\s*/\r/'
+  call setline(2, a:line)
+  call cursor(l:curPos[1] + 1, l:curPos[2])
+endfunction
