@@ -54,7 +54,7 @@ function! ImportJs#ImportFZF() abort
   call fzf#run({
   \  'source':  l:lines,
   \  'sink':    function('s:fzf_callback'),
-  \  'options': '-m -x +s',
+  \  'options': '-m -x +s --exact',
   \  'down':    '40%'})
 endfunction
 
